@@ -7,6 +7,7 @@ import validateParams from "./utils/validateParams.js";
 function flattenArray(array) {
     validateParams("array", array);
 
+    // Option 1
     let result = [];
     (function flat(value) {
         Array.isArray(value)
@@ -15,6 +16,9 @@ function flattenArray(array) {
     })(array)
 
     return result;
+
+    // Option 2 
+    // return array.flat(Infinity);
 }
 
 
