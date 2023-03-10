@@ -9,10 +9,12 @@ const minBonus: number = 100;
 type SumDigits = { even: number; odd: number };
 
 
-function getBonus(promoCode: number): number {
+function getBonus(promoCode: number): number | never {
     let bonus: number = 0;
 
-    if (!isPromoCodeValid(promoCode)) return bonus;
+    if (!isPromoCodeValid(promoCode)) {
+        throw new Error("Invalid promocode");
+    };
 
     const promoCodeArray: number[] = getArrayFromCode(promoCode);
 
@@ -89,3 +91,4 @@ console.log(getBonus(84533920)); // 0
 console.log(getBonus(48183276)); // 100
 console.log(getBonus(73289388)); // 1000
 console.log(getBonus(35787918)) // 2000
+// console.log(getBonus(845339207)); // Error
