@@ -13,7 +13,7 @@ function getBonus(promoCode: number): number | never {
     let bonus: number = 0;
 
     if (!isPromoCodeValid(promoCode)) {
-        throw new Error("Invalid promocode");
+        throw new Error("Invalid promo code");
     };
 
     const promoCodeArray: number[] = getArrayFromCode(promoCode);
