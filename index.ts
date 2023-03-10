@@ -40,27 +40,21 @@ function isPromoCodeValid(promoCode: number): boolean {
 }
 
 function getArrayFromCode(code: number): number[] {
-    const arr: number[] = [];
+    let truncedNumber = Math.trunc(code % 10);
 
-    function getNumbers(num: number): void {
-        let trunc = Math.trunc(num);
-        if (trunc / 10 > 0) {
-            arr.push(Math.trunc(num % 10));
-            getNumbers(num / 10);
-        } else {
-            return;
-        }
+    if (code < 10) {
+        return [truncedNumber]
     }
 
-    getNumbers(code);
-
+    const arr: number[] = getArrayFromCode(code / 10);
+    arr.push(truncedNumber)
     return arr;
 }
 
 function getOddPairs(arr: number[]): number[][] {
-    return arr.reduceRight((acc: number[][], curr: number, i: number): number[][] => {
-        const next = arr[i - 1];
-        const prev = arr[i + 1];
+    return arr.reduce((acc: number[][], curr: number, i: number): number[][] => {
+        const next = arr[i + 1];
+        const prev = arr[i - 1];
         if (isOdd(curr) && (next && isOdd(next))) {
             if (!prev || !isOdd(prev)) {
                 acc.push([curr, next]);
