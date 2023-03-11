@@ -21,9 +21,7 @@ function getBonus(promoCode: number): number | never {
     const oddPairs: number[][] = getOddPairs(promoCodeArray);
 
     if (oddPairs.length >= minimumPairs) {
-        bonus = oddPairs
-            .filter((pair) => pair[0] < pair[1])
-            .length === minimumPairs ? maxBonus : middleBonus;
+        bonus = oddPairs.every(pair => pair[0] < pair[1]) ? maxBonus : middleBonus
     } else {
         const { even, odd } = getEvenOddSums(promoCodeArray);
         if (even > odd) {
@@ -62,7 +60,7 @@ function getOddPairs(arr: number[]): number[][] {
                 acc.push([curr, next]);
             } else {
                 if (!isOdd(prev)) {
-                    acc.length && acc.splice(0, 1);
+                    acc.length && acc.splice(-1, 1);
                 }
             }
         }
